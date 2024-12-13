@@ -7,7 +7,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-st.title("Weekly Activity Aggregation (Plotly)")
+st.title("Break Points Dashboard")
 
 input_method = st.radio("Select data input method",
                         ("Text Input on Web", "File Upload"))
@@ -121,12 +121,11 @@ if data is not None:
 
     filtered_data = df[df["week"] == selected_week]
 
-    st.subheader(f"{selected_week} per app")
+    st.subheader(f"Bar Stack")
     bar_fig = px.bar(filtered_data, x="category", y="activity", title=f"{selected_week} per app", color="day",
                      labels={"category": "Apps", "activity": "Counts"}, text="activity", color_discrete_sequence=px.colors.qualitative.D3)
     st.plotly_chart(bar_fig)
 
-    st.subheader(f"{selected_week} per day")
     bar_fig = px.bar(filtered_data, x="day", y="activity", title=f"{selected_week} per day", color="category",
                      labels={"category": "Day", "activity": "Counts"}, text="activity", color_discrete_sequence=px.colors.qualitative.Antique)
     st.plotly_chart(bar_fig)
